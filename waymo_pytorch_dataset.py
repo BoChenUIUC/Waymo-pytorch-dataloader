@@ -185,6 +185,7 @@ class WaymoDataset(Dataset):
         # preprocess bounding box data
         id_to_bbox = dict()
         id_to_name = dict()
+        print(frame.projected_lidar_labels)
         for labels in frame.projected_lidar_labels:
             name = labels.name
             for label in labels.labels:
@@ -192,7 +193,6 @@ class WaymoDataset(Dataset):
                         label.box.center_x + label.box.length / 2, label.box.center_y + label.box.width / 2]
                 id_to_bbox[label.id] = bbox
                 id_to_name[label.id] = name - 1
-        print(id_to_bbox)
         
         object_list = []
         for obj in frame.laser_labels:
