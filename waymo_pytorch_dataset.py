@@ -246,7 +246,7 @@ if __name__ == '__main__':
     image = dataset.get_image(frame, idx)
     
     print(image.shape, idx)
-    cv2.imwrite('original.jpg', image)
+    #cv2.imwrite('original.jpg', image)
     
     # groundtruth
     gtimg = image.copy()
@@ -257,16 +257,19 @@ if __name__ == '__main__':
         if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
         cv2.rectangle(gtimg,(left, top), (right, bottom),(0,255,0))
         cv2.putText(gtimg,obj.cls_type,(left,top-2),0,.6,(0,255,0))
-    cv2.imwrite('groundtruth.jpg', gtimg)
+    #cv2.imwrite('groundtruth.jpg', gtimg)
     
     # inference with yolov5
     import torch
+    from torchvision import transforms
 
     # Model
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
 
+    # transform
+    thimg = transforms.ToTensor(image)
     # Inference
-    results = model(image)
+    results = model(thimg)
 
     # Results
     results.save('.')  # or .show(), .save(), .crop(), .pandas(), etc.
