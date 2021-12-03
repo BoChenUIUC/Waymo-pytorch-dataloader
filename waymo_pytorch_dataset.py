@@ -76,10 +76,12 @@ class WaymoDataset(Dataset):
     
     @property
     def count(self):
+        print('c')
         return self._curr_counter
     
     @property
     def data(self):
+        print('d')
         self._curr_counter+=1
         return self.__getitem__(self._curr_counter)
     
