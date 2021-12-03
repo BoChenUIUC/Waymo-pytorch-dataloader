@@ -236,6 +236,7 @@ if __name__ == '__main__':
     LOCATIONS = ['location_sf']
 
     dataset = WaymoDataset(DATA_PATH, LOCATIONS, 'train', True, "new_waymo")
+    # 0-5 for training; 0-2 for val
 
     frame, idx = dataset.data, dataset.count
     calib = dataset.get_calib(frame, idx)
