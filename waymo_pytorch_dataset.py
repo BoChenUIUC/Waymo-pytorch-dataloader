@@ -243,4 +243,4 @@ if __name__ == '__main__':
         target = dataset.get_label(frame, idx)
         image = dataset.get_image(frame, idx)
         
-        print(image.size(), idx, target)
+        print(image.shape, idx, target)
