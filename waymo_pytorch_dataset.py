@@ -367,6 +367,7 @@ if __name__ == '__main__':
             correct = process_batch(predn, labelsn, iouv)
         else:
             correct = torch.zeros(pred.shape[0], niou, dtype=torch.bool)
+        print(correct)
         stats.append((correct.cpu(), pred[:, 4].cpu(), pred[:, 5].cpu(), tcls))  # (correct, conf, pcls, tcls)
         
     # Compute metrics
