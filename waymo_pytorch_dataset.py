@@ -270,10 +270,14 @@ if __name__ == '__main__':
     # transform
     ptimg = transforms.ToTensor()(image).unsqueeze(0)
     out, train_out = model(ptimg)
+    
     # Inference
     from utils.plots import output_to_target, plot_images
     plot_images(ptimg, output_to_target(out), '.')
 
-    
     # need to compute loss from results
     # normalized target label
+    # input targets(image,class,x,y,w,h)
+    from utils.loss import ComputeLoss
+    to = [x.float() for x in train_out]
+    print(to)
