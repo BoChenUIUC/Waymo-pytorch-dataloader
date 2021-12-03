@@ -279,5 +279,5 @@ if __name__ == '__main__':
     # normalized target label
     # input targets(image,class,x,y,w,h)
     from utils.loss import ComputeLoss
-    to = [x.float() for x in train_out]
+    to = [x.shape for x in train_out]
     print(to)
