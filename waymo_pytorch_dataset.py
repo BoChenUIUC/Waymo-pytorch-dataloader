@@ -236,10 +236,11 @@ if __name__ == '__main__':
 
     dataset = WaymoDataset(DATA_PATH, LOCATIONS, 'train', True, "new_waymo")
 
-    frame, idx = dataset.data, dataset.count
-    calib = dataset.get_calib(frame, idx)
-    pts =  dataset.get_lidar(frame, idx)
-    target = dataset.get_label(frame, idx)
-    image = dataset.get_image(frame, idx)
-    
-    print(image, idx, target)
+    for i in range(10):
+        frame, idx = dataset.data, dataset.count
+        calib = dataset.get_calib(frame, idx)
+        pts =  dataset.get_lidar(frame, idx)
+        target = dataset.get_label(frame, idx)
+        image = dataset.get_image(frame, idx)
+        
+        print(image.size(), idx, target)
