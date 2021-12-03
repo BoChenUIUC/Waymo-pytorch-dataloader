@@ -58,7 +58,7 @@ class WaymoDataset(Dataset):
         self._file_counter = -1 # Count the number of files used
         self._dataset_nums = [] # Number of frames to be considered from each file (records+files)
         self._dataset_itr = None # tfRecord iterator
-        self.num_sample = self.num_frames
+        self.num_sample = self._total_frames
         
         if use_cache: self.make_cache()
     
