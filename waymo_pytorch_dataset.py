@@ -229,3 +229,13 @@ class WaymoDataset(Dataset):
     def make_cache(self):
         return NotImplemented 
 
+if __name__ == '__main__':
+    DATA_PATH = '/home/research/dataset/waymo'
+    LOCATIONS = ['location_sf']
+
+    dataset = WaymoDataset(DATA_PATH, LOCATIONS, 'train', True, "new_waymo")
+
+    frame, idx = dataset.data, dataset.count
+    calib = dataset.get_calib(frame, idx)
+    pts =  dataset.get_lidar(frame, idx)
+    target = dataset.get_label(frame, idx)
