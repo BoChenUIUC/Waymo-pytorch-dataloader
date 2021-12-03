@@ -265,9 +265,11 @@ if __name__ == '__main__':
 
     # Model
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
+    model.eval()
 
     # transform
-    thimg = transforms.ToTensor()(image).unsqueeze(0)
+    ptimg = transforms.ToTensor()(image).unsqueeze(0)
+    out, train_out = model(image)
     # Inference
     results = model(image)
 
@@ -275,5 +277,4 @@ if __name__ == '__main__':
     results.save('.')  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # need to compute loss from results
-    print(results.imgs[0].shape)
     # normalized target label
