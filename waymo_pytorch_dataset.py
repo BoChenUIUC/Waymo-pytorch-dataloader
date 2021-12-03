@@ -301,7 +301,7 @@ if __name__ == '__main__':
         if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
         cls = 2 if obj.cls_type == 'VEHICLE' else 0
         x_center = (left + right)/W; y_center = (top + bottom)/H; width = (right - left)/W; height = (bottom - top)/H
-        targets += [0,cls,x_center,y_center,width,height]
+        targets += [[0,cls,x_center,y_center,width,height]]
     targets = torch.FloatTensor(targets)
 
     # Inference
