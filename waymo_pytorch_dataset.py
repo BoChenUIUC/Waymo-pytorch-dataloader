@@ -296,7 +296,7 @@ if __name__ == '__main__':
     shape = (H,W)
     
     # Resize 
-    image = cv2.resize(image, (W0, H0), cv2.INTER_LINEAR)
+    image = cv2.resize(image, (W, H), cv2.INTER_LINEAR)
     
     # Extract labels
     targets = []
@@ -310,8 +310,8 @@ if __name__ == '__main__':
     targets = torch.FloatTensor(targets).cuda(0)
 
     # Inference
-    ptimg = transforms.ToTensor()(image).unsqueeze(0)
     print(ptimg.size())
+    ptimg = transforms.ToTensor()(image).unsqueeze(0)
     out, train_out = model(ptimg)
 
     # need to compute loss from results
