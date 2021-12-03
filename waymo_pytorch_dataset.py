@@ -243,4 +243,6 @@ if __name__ == '__main__':
     target = dataset.get_label(frame, idx)
     image = dataset.get_image(frame, idx)
     
-    print(image.shape, idx, target.box2d)
+    print(image.shape, idx)
+    for obj in target:
+        print(obj.box2d)
