@@ -232,7 +232,7 @@ class WaymoDataset(Dataset):
         return NotImplemented 
 
 if __name__ == '__main__':
-    DATA_PATH = '/home/monet/research/dataset/waymo'
+    DATA_PATH = '/home/monet/research/dataset/waymo/training'
     LOCATIONS = ['location_sf']
 
     dataset = WaymoDataset(DATA_PATH, LOCATIONS, 'train', True, "new_waymo")
