@@ -354,8 +354,6 @@ if __name__ == '__main__':
             continue
 
         # Predictions
-        if single_cls:
-            pred[:, 5] = 0
         predn = pred.clone()
         scale_coords(image[si].shape[1:], predn[:, :4], shape)  # native-space pred
 
