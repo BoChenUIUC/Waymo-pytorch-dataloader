@@ -76,12 +76,10 @@ class WaymoDataset(Dataset):
     
     @property
     def count(self):
-        print('c')
         return self._curr_counter
     
     @property
     def data(self):
-        print('d')
         self._curr_counter+=1
         return self.__getitem__(self._curr_counter)
     
@@ -108,6 +106,7 @@ class WaymoDataset(Dataset):
         self._curr_counter = idx
         # Get the next dataset if frame number is more than table count
         if self._frame_counter == -1 or not len(self._dataset_nums) or self._frame_counter >= self._dataset_nums[self._file_counter]-1: 
+            print('1')
             self.current_file = self.__file_names.pop() # get one filename
             dataset = WaymoDataFileReader(self.current_file) # get Dataloader
             self._sample_list = dataset.get_record_table() # get number of record table
@@ -117,6 +116,7 @@ class WaymoDataset(Dataset):
                 self._dataset_nums.append(len(self._sample_list))
             self._frame_counter = 1
         else:
+            print('2')
             self._frame_counter+=1
         self._num_frames+=1
         self._idx_to_frame.append((self._file_counter, self._frame_counter))
