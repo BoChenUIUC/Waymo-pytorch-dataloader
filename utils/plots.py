@@ -231,6 +231,7 @@ def plot_images(images, targets, paths=None, fname='images.jpg', names=None, max
                     boxes *= scale
             boxes[[0, 2]] += x
             boxes[[1, 3]] += y
+            print(boxes)
             for j, box in enumerate(boxes.T.tolist()):
                 cls = classes[j]
                 color = colors(cls)
