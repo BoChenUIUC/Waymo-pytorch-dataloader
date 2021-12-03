@@ -313,8 +313,7 @@ if __name__ == '__main__':
     # input targets(image,class,x,y,w,h)
     # Loss func
     from utils.loss import ComputeLoss
-    print(model.model)
-    compute_loss = ComputeLoss(model)
+    compute_loss = ComputeLoss(model.model)
     loss = compute_loss([x.float() for x in train_out], targets.to(train_out.device))[0]  # box, obj, cls
     
     # NMS
