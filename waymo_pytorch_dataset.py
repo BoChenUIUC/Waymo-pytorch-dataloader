@@ -272,5 +272,5 @@ if __name__ == '__main__':
     results.save('.')  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # need to compute loss from results
-    print(results.imgs.shape)
+    print(results.imgs[0].shape)
     # normalized target label
