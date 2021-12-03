@@ -355,13 +355,12 @@ if __name__ == '__main__':
 
         # Predictions
         predn = pred.clone()
-        print(image[si].shape[1:], shape)
-        scale_coords(image[si].shape[1:], predn[:, :4], shape)  # native-space pred
+        scale_coords(ptimg[si].shape[1:], predn[:, :4], shape)  # native-space pred
 
         # Evaluate
         if nl:
             tbox = xywh2xyxy(labels[:, 1:5])  # target boxes
-            scale_coords(image[si].shape[1:], tbox, shape)  # native-space labels
+            scale_coords(ptimg[si].shape[1:], tbox, shape)  # native-space labels
             labelsn = torch.cat((labels[:, 0:1], tbox), 1)  # native-space labels
             correct = process_batch(predn, labelsn, iouv)
         else:
