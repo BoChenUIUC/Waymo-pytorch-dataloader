@@ -334,8 +334,8 @@ if __name__ == '__main__':
     
     # Plot
     from utils.plots import output_to_target, plot_images
-    #plot_images(ptimg, targets, '.', 'labels.jpg')
-    #plot_images(ptimg, output_to_target(out), '.', 'pred.jpg')
+    plot_images(ptimg, targets, '.', 'labels.jpg')
+    plot_images(ptimg, output_to_target(out), '.', 'pred.jpg')
     print(targets)
     print(output_to_target(out))
     
