@@ -242,7 +242,6 @@ def process_batch(detections, labels, iouv):
     """
     correct = torch.zeros(detections.shape[0], iouv.shape[0], dtype=torch.bool, device=iouv.device)
     iou = box_iou(labels[:, 1:], detections[:, :4])
-    print(labels[:, 1:],detections[:, :4])
     x = torch.where((iou >= iouv[0]) & (labels[:, 0:1] == detections[:, 5]))  # IoU above threshold and classes match
     if x[0].shape[0]:
         matches = torch.cat((torch.stack(x, 1), iou[x[0], x[1]][:, None]), 1).cpu().numpy()  # [label, detection, iou]
@@ -358,12 +357,12 @@ if __name__ == '__main__':
 
         # Predictions
         predn = pred.clone()
-        scale_coords(ptimg[si].shape[1:], predn[:, :4], shape)  # native-space pred
+        #scale_coords(ptimg[si].shape[1:], predn[:, :4], shape)  # native-space pred
 
         # Evaluate
         if nl:
             tbox = xywh2xyxy(labels[:, 1:5])  # target boxes
-            scale_coords(ptimg[si].shape[1:], tbox, shape)  # native-space labels
+            #scale_coords(ptimg[si].shape[1:], tbox, shape)  # native-space labels
             labelsn = torch.cat((labels[:, 0:1], tbox), 1)  # native-space labels
             correct = process_batch(predn, labelsn, iouv)
         else:
