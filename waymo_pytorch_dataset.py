@@ -362,7 +362,7 @@ if __name__ == '__main__':
             tbox = xywh2xyxy(labels[:, 1:5])  # target boxes
             scale_coords(ptimg[si].shape[1:], tbox, shape)  # native-space labels
             labelsn = torch.cat((labels[:, 0:1], tbox), 1)  # native-space labels
-            print(predn.device, labelsn.device, iouv.device)
+            print(predn.device, labelsn.device, labels.device)
             correct = process_batch(predn, labelsn, iouv)
         else:
             correct = torch.zeros(pred.shape[0], niou, dtype=torch.bool)
