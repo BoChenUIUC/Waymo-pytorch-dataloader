@@ -236,9 +236,8 @@ if __name__ == '__main__':
     LOCATIONS = ['location_sf']
 
     dataset = WaymoDataset(DATA_PATH, LOCATIONS, 'train', True, "new_waymo")
-    L = len(dataset)
 
-    for i in range(L):
+    for i in range(10):
         frame, idx = dataset.data, dataset.count
         calib = dataset.get_calib(frame, idx)
         pts =  dataset.get_lidar(frame, idx)
