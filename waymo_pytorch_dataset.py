@@ -336,6 +336,8 @@ if __name__ == '__main__':
     from utils.plots import output_to_target, plot_images
     plot_images(ptimg, targets, '.', 'labels.jpg')
     plot_images(ptimg, output_to_target(out), '.', 'pred.jpg')
+    print(targets)
+    print(output_to_target(out))
     
     # Metrics
     iouv = torch.linspace(0.5, 0.95, 10).cuda(0)  # iou vector for mAP@0.5:0.95
