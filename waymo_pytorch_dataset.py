@@ -269,8 +269,7 @@ if __name__ == '__main__':
     results = model(image)
 
     # Results
-    results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
+    results.save('.')  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # need to compute loss from results
-    print(results)
     
