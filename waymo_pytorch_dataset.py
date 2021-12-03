@@ -247,5 +247,5 @@ if __name__ == '__main__':
     import cv2
     for obj in target:
         left,top,right,bottom = obj.box2d
-        cv2.rectangle(image,(left, top), (right, bottom))
+        cv2.rectangle(image,(left, top), (right, bottom),(0,255,0))
     cv2.imwrite('gt.jpg', image)
