@@ -123,6 +123,7 @@ class WaymoDataset(Dataset):
     def count_frames(self):
         # Count total frames 
         for file_name in self.__file_names:
+            print(file_name)
             dataset = WaymoDataFileReader(file_name)
             for frame in tqdm.tqdm(dataset):
                 self._total_frames+=1
@@ -235,6 +236,7 @@ if __name__ == '__main__':
     LOCATIONS = ['location_sf']
 
     dataset = WaymoDataset(DATA_PATH, LOCATIONS, 'train', True, "new_waymo")
+    print(dataset.count_frames())
 
     for i in range(10):
         frame, idx = dataset.data, dataset.count
