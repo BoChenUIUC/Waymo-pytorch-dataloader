@@ -307,12 +307,10 @@ if __name__ == '__main__':
         cls = 2 if obj.cls_type == 'VEHICLE' else 0
         x_center = (left + right)/W0; y_center = (top + bottom)/H0; width = (right - left)/W0; height = (bottom - top)/H0
         targets += [[0,cls,x_center,y_center,width,height]]
-    print(targets)
     targets = torch.FloatTensor(targets).cuda(0)
 
     # Inference
     ptimg = transforms.ToTensor()(image).unsqueeze(0)
-    print(ptimg.size())
     out, train_out = model(ptimg)
 
     # need to compute loss from results
