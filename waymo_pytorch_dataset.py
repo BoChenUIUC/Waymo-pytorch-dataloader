@@ -116,11 +116,9 @@ class WaymoDataset(Dataset):
             self._frame_counter = 1
         else:
             self._frame_counter+=1
-        print('x')
         self._num_frames+=1
         self._idx_to_frame.append((self._file_counter, self._frame_counter))
-        print('y')
-        return next(self.dataset_itr) # Send next frame from record 
+        return next(self._dataset_itr) # Send next frame from record 
     
     def count_frames(self):
         # Count total frames 
