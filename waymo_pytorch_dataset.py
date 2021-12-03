@@ -271,10 +271,9 @@ if __name__ == '__main__':
     ptimg = transforms.ToTensor()(image).unsqueeze(0)
     out, train_out = model(ptimg)
     # Inference
-    results = model(image)
+    from utils.plots import output_to_target, plot_images
+    plot_images(ptimg, output_to_target(out), '.')
 
-    # Results
-    results.save('.')  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # need to compute loss from results
     # normalized target label
