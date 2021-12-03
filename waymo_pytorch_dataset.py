@@ -322,7 +322,7 @@ if __name__ == '__main__':
     loss = compute_loss([x.float() for x in train_out], targets.to(out.device))[0]  # box, obj, cls
     
     # NMS
-    from utils.general import non_max_suppression, scale_coords, xywh2xyxy
+    from utils.general import box_iou, non_max_suppression, scale_coords, xywh2xyxy
     targets[:, 2:] *= torch.Tensor([W, H, W, H]).to(targets.device)  # to pixels
     nb = 1
     conf_thres=0.001  # confidence threshold
