@@ -310,8 +310,8 @@ if __name__ == '__main__':
     targets = torch.FloatTensor(targets).cuda(0)
 
     # Inference
-    print(ptimg.size())
     ptimg = transforms.ToTensor()(image).unsqueeze(0)
+    print(ptimg.size())
     out, train_out = model(ptimg)
 
     # need to compute loss from results
