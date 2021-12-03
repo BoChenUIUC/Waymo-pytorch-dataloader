@@ -248,6 +248,7 @@ if __name__ == '__main__':
     for obj in target:
         left,top,right,bottom = obj.box2d
         if bottom-top <=20: continue
+        if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
         cv2.rectangle(image,(left, top), (right, bottom),(0,255,0))
         cv2.putText(image,obj.cls_type,(left,top),0,0.3,(0,255,0))
     cv2.imwrite('gt.jpg', image)
