@@ -245,6 +245,21 @@ if __name__ == '__main__':
     image = dataset.get_image(frame, idx)
     
     print(image.shape, idx)
+    cv2.imwrite('original.jpg', image)
+    
+    # inference with yolov5
+    import torch
+
+    # Model
+    model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
+
+    # Inference
+    results = model(image)
+
+    # Results
+    results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
+    
+    # groundtruth
     import cv2
     for obj in target:
         left,top,right,bottom = obj.box2d
@@ -252,4 +267,4 @@ if __name__ == '__main__':
         if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
         cv2.rectangle(image,(left, top), (right, bottom),(0,255,0))
         cv2.putText(image,obj.cls_type,(left,top),0,0.3,(0,255,0))
-    cv2.imwrite('gt.jpg', image)
+    cv2.imwrite('groundtruth.jpg', image)
