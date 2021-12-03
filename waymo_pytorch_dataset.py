@@ -255,7 +255,7 @@ if __name__ == '__main__':
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
 
     # Inference
-    results = model(image)
+    results = model(image.copy())
 
     # Results
     results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
