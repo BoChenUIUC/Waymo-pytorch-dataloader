@@ -307,7 +307,7 @@ if __name__ == '__main__':
         cls = 2 if obj.cls_type == 'VEHICLE' else 0
         x_center = (left + right)/W; y_center = (top + bottom)/H; width = (right - left)/W; height = (bottom - top)/H
         targets += [[0,cls,x_center,y_center,width,height]]
-    targets = torch.FloatTensor(targets)
+    targets = torch.FloatTensor(targets).cuda(0)
 
     # Inference
     ptimg = transforms.ToTensor()(image).unsqueeze(0)
@@ -319,7 +319,7 @@ if __name__ == '__main__':
     # Loss func
     from utils.loss import ComputeLoss
     compute_loss = ComputeLoss(model.model)
-    loss = compute_loss([x.float() for x in train_out], targets.to(out.device))[0]  # box, obj, cls
+    loss = compute_loss([x.float() for x in train_out], targets)[0]  # box, obj, cls
     
     # NMS
     from utils.general import box_iou, non_max_suppression, scale_coords, xywh2xyxy
@@ -362,7 +362,6 @@ if __name__ == '__main__':
             tbox = xywh2xyxy(labels[:, 1:5])  # target boxes
             scale_coords(ptimg[si].shape[1:], tbox, shape)  # native-space labels
             labelsn = torch.cat((labels[:, 0:1], tbox), 1)  # native-space labels
-            print(predn.device, labelsn.device, targets.device)
             correct = process_batch(predn, labelsn, iouv)
         else:
             correct = torch.zeros(pred.shape[0], niou, dtype=torch.bool)
