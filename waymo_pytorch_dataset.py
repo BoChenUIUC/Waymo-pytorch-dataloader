@@ -111,12 +111,12 @@ class WaymoDataset(Dataset):
             dataset = WaymoDataFileReader(self.current_file) # get Dataloader
             self._sample_list = dataset.get_record_table() # get number of record table
             self._dataset_itr = iter(dataset) # Get next record iterator
+            print('?')
             if self._frame_counter == -1:
                 self._file_counter +=1
                 self._dataset_nums.append(len(self._sample_list))
             self._frame_counter = 1
         else:
-            print('2')
             self._frame_counter+=1
         self._num_frames+=1
         self._idx_to_frame.append((self._file_counter, self._frame_counter))
