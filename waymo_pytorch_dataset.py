@@ -236,7 +236,8 @@ if __name__ == '__main__':
 
     dataset = WaymoDataset(DATA_PATH, LOCATIONS, 'train', True, "new_waymo")
 
-    frame, idx = dataset.data, dataset.count
+    frame = dataset.data
+    idx = dataset.count
     calib = dataset.get_calib(frame, idx)
     pts =  dataset.get_lidar(frame, idx)
     target = dataset.get_label(frame, idx)
