@@ -292,6 +292,11 @@ if __name__ == '__main__':
     
     # Get shape
     H,W,C = image.shape
+    H0,W0 = 480,640
+    shape = (H0,W0)
+    
+    # Resize 
+    image = cv2.resize(image, (W0, H0), cv2.INTER_LINEAR)
     
     # Extract labels
     targets = []
@@ -341,7 +346,6 @@ if __name__ == '__main__':
         labels = targets[targets[:, 0] == si, 1:]
         nl = len(labels)
         tcls = labels[:, 0].tolist() if nl else []  # target class
-        path, shape = Path(paths[si]), shapes[si][0]
         seen += 1
 
         if len(pred) == 0:
@@ -353,12 +357,12 @@ if __name__ == '__main__':
         if single_cls:
             pred[:, 5] = 0
         predn = pred.clone()
-        scale_coords(im[si].shape[1:], predn[:, :4], shape, shapes[si][1])  # native-space pred
+        scale_coords(image[si].shape[1:], predn[:, :4], shape)  # native-space pred
 
         # Evaluate
         if nl:
             tbox = xywh2xyxy(labels[:, 1:5])  # target boxes
-            scale_coords(im[si].shape[1:], tbox, shape, shapes[si][1])  # native-space labels
+            scale_coords(image[si].shape[1:], tbox, shape)  # native-space labels
             labelsn = torch.cat((labels[:, 0:1], tbox), 1)  # native-space labels
             correct = process_batch(predn, labelsn, iouv)
         else:
