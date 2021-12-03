@@ -314,8 +314,7 @@ if __name__ == '__main__':
     # Loss func
     from utils.loss import ComputeLoss
     compute_loss = ComputeLoss(model.model)
-    print(targets.size(),compute_loss.na)
-    loss = compute_loss([x.float() for x in train_out], targets.to(ptimg.device))[0]  # box, obj, cls
+    loss = compute_loss([x.float() for x in train_out], targets.to(out.device))[0]  # box, obj, cls
     
     # NMS
     from utils.general import non_max_suppression, scale_coords, xywh2xyxy
