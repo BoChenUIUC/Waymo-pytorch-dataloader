@@ -290,10 +290,6 @@ if __name__ == '__main__':
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
     model.eval()
     
-    # Loss func
-    from utils.loss import ComputeLoss
-    compute_loss = ComputeLoss(model)
-    
     # Get shape
     H,W,C = image.shape
     
@@ -315,6 +311,10 @@ if __name__ == '__main__':
     # need to compute loss from results
     # normalized target label
     # input targets(image,class,x,y,w,h)
+    # Loss func
+    from utils.loss import ComputeLoss
+    print(model.model)
+    compute_loss = ComputeLoss(model)
     loss = compute_loss([x.float() for x in train_out], targets.to(train_out.device))[0]  # box, obj, cls
     
     # NMS
@@ -368,7 +368,7 @@ if __name__ == '__main__':
         
     # Compute metrics
     nc = 2
-    names = {k: v for k, v in enumerate(model.names if hasattr(model, 'names') else model.module.names)}
+    names = {0:'VEHICLE', 1:'PEDESTRIAN'}
     from utils.metrics import ap_per_class
     stats = [np.concatenate(x, 0) for x in zip(*stats)]  # to numpy
     if len(stats) and stats[0].any():
