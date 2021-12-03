@@ -272,6 +272,7 @@ if __name__ == '__main__':
     results = model(thimg)
 
     # Results
+    print(results)
     results.save('.')  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # need to compute loss from results
