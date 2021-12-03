@@ -240,3 +240,5 @@ if __name__ == '__main__':
     calib = dataset.get_calib(frame, idx)
     pts =  dataset.get_lidar(frame, idx)
     target = dataset.get_label(frame, idx)
+    
+    print(len(dataset))
