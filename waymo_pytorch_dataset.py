@@ -362,7 +362,6 @@ if __name__ == '__main__':
             tbox = xywh2xyxy(labels[:, 1:5])  # target boxes
             scale_coords(ptimg[si].shape[1:], tbox, shape)  # native-space labels
             labelsn = torch.cat((labels[:, 0:1], tbox), 1)  # native-space labels
-            print(predn.device, labelsn.device, targets.device)
             correct = process_batch(predn, labelsn, iouv)
         else:
             correct = torch.zeros(pred.shape[0], niou, dtype=torch.bool)
@@ -370,7 +369,7 @@ if __name__ == '__main__':
         
     # Compute metrics
     nc = 2
-    names = {0:'VEHICLE', 1:'PEDESTRIAN'}
+    names = {k: v for k, v in enumerate(model.names if hasattr(model, 'names') else model.module.names)}
     from utils.metrics import ap_per_class
     stats = [np.concatenate(x, 0) for x in zip(*stats)]  # to numpy
     if len(stats) and stats[0].any():
