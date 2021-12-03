@@ -241,4 +241,4 @@ if __name__ == '__main__':
     pts =  dataset.get_lidar(frame, idx)
     target = dataset.get_label(frame, idx)
     
-    print(len(dataset))
+    print(frame, idx, target)
