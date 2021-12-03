@@ -263,6 +263,7 @@ if __name__ == '__main__':
     # groundtruth
     for obj in target:
         left,top,right,bottom = obj.box2d
+        print(obj.box2d)
         if bottom-top <=20: continue
         #if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
         cv2.rectangle(image,(left, top), (right, bottom),(0,255,0))
