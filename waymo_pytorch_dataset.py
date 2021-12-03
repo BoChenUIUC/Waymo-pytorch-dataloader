@@ -272,5 +272,5 @@ if __name__ == '__main__':
     results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # need to compute loss from results
-    print(model.training)
+    print(results)
     
