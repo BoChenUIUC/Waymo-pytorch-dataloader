@@ -269,7 +269,7 @@ if __name__ == '__main__':
 
     # transform
     ptimg = transforms.ToTensor()(image).unsqueeze(0)
-    out, train_out = model(image)
+    out, train_out = model(ptimg)
     # Inference
     results = model(image)
 
