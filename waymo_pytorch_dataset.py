@@ -291,9 +291,9 @@ if __name__ == '__main__':
     model.eval()
     
     # Get shape
-    H,W,C = image.shape
-    H0,W0 = 480,640
-    shape = (H0,W0)
+    H0,W0,C = image.shape
+    H,W = 480,640
+    shape = (H,W)
     
     # Resize 
     image = cv2.resize(image, (W0, H0), cv2.INTER_LINEAR)
@@ -305,7 +305,7 @@ if __name__ == '__main__':
         if bottom-top <=20: continue
         if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
         cls = 2 if obj.cls_type == 'VEHICLE' else 0
-        x_center = (left + right)/W; y_center = (top + bottom)/H; width = (right - left)/W; height = (bottom - top)/H
+        x_center = (left + right)/W0; y_center = (top + bottom)/H0; width = (right - left)/W0; height = (bottom - top)/H0
         targets += [[0,cls,x_center,y_center,width,height]]
     targets = torch.FloatTensor(targets).cuda(0)
 
