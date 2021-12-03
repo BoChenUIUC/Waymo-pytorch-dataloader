@@ -236,7 +236,7 @@ if __name__ == '__main__':
     LOCATIONS = ['location_sf']
 
     dataset = WaymoDataset(DATA_PATH, LOCATIONS, 'train', True, "new_waymo")
-    print(dataset.count_frames())
+    dataset.count_frames()
 
     for i in range(10):
         frame, idx = dataset.data, dataset.count
@@ -245,4 +245,4 @@ if __name__ == '__main__':
         target = dataset.get_label(frame, idx)
         image = dataset.get_image(frame, idx)
         
-        print(image.shape, idx, target)
+        print(image.shape, idx, target, pts, calib)
