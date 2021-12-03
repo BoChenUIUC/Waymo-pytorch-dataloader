@@ -232,6 +232,7 @@ class WaymoDataset(Dataset):
         return NotImplemented 
 
 if __name__ == '__main__':
+    import cv2
     DATA_PATH = '/home/monet/research/dataset/waymo/training'
     LOCATIONS = ['location_sf']
 
@@ -260,7 +261,6 @@ if __name__ == '__main__':
     results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # groundtruth
-    import cv2
     for obj in target:
         left,top,right,bottom = obj.box2d
         if bottom-top <=20: continue
