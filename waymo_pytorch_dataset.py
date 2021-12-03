@@ -375,7 +375,7 @@ if __name__ == '__main__':
     from utils.metrics import ap_per_class
     stats = [np.concatenate(x, 0) for x in zip(*stats)]  # to numpy
     if len(stats) and stats[0].any():
-        tp, fp, p, r, f1, ap, ap_class = ap_per_class(*stats, plot=True, save_dir=Path(''), names=names)
+        tp, fp, p, r, f1, ap, ap_class = ap_per_class(*stats, plot=False, save_dir=Path(''), names=names)
         ap50, ap = ap[:, 0], ap.mean(1)  # AP@0.5, AP@0.5:0.95
         mp, mr, map50, map = p.mean(), r.mean(), ap50.mean(), ap.mean()
         nt = np.bincount(stats[3].astype(np.int64), minlength=nc)  # number of targets per class
