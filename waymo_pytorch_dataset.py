@@ -307,6 +307,7 @@ if __name__ == '__main__':
         cls = 2 if obj.cls_type == 'VEHICLE' else 0
         x_center = (left + right)/W0; y_center = (top + bottom)/H0; width = (right - left)/W0; height = (bottom - top)/H0
         targets += [[0,cls,x_center,y_center,width,height]]
+    print(targets)
     targets = torch.FloatTensor(targets).cuda(0)
 
     # Inference
@@ -324,7 +325,7 @@ if __name__ == '__main__':
     
     # NMS
     from utils.general import box_iou, non_max_suppression, scale_coords, xywh2xyxy
-    targets[:, 2:] *= torch.Tensor([W0, H0, W0, H0]).to(targets.device)  # to pixels
+    targets[:, 2:] *= torch.Tensor([W, H, W, H]).to(targets.device)  # to pixels
     nb = 1
     conf_thres=0.001  # confidence threshold
     iou_thres=0.6  # NMS IoU threshold
