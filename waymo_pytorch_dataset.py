@@ -323,7 +323,7 @@ if __name__ == '__main__':
     
     # NMS
     from utils.general import box_iou, non_max_suppression, scale_coords, xywh2xyxy
-    targets[:, 2:] *= torch.Tensor([W, H, W, H]).to(targets.device)  # to pixels
+    targets[:, 2:] *= torch.Tensor([W0, H0, W0, H0]).to(targets.device)  # to pixels
     nb = 1
     conf_thres=0.001  # confidence threshold
     iou_thres=0.6  # NMS IoU threshold
@@ -357,9 +357,7 @@ if __name__ == '__main__':
 
         # Predictions
         predn = pred.clone()
-        print(predn)
         scale_coords(ptimg[si].shape[1:], predn[:, :4], shape)  # native-space pred
-        print(predn)
 
         # Evaluate
         if nl:
