@@ -269,10 +269,9 @@ if __name__ == '__main__':
     # transform
     thimg = transforms.ToTensor()(image).unsqueeze(0)
     # Inference
-    results = model(thimg)
+    results = model(image)
 
     # Results
-    print(results)
     results.save('.')  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # need to compute loss from results
