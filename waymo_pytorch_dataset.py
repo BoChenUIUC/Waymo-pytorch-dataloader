@@ -244,5 +244,8 @@ if __name__ == '__main__':
     image = dataset.get_image(frame, idx)
     
     print(image.shape, idx)
+    import cv2
     for obj in target:
-        print(obj.box2d)
+        left,top,right,bottom = obj.box2d
+        cv2.rectangle(image,(left, top), (right, bottom))
+    cv2.imwrite('gt.jpg', image)
