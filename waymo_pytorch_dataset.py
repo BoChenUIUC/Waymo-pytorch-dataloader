@@ -254,9 +254,9 @@ if __name__ == '__main__':
         left,top,right,bottom = obj.box2d
         left,top,right,bottom = int(left),int(top),int(right),int(bottom)
         if bottom-top <=20: continue
-        if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
+        #if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
         cv2.rectangle(gtimg,(left, top), (right, bottom),(0,255,0))
-        cv2.putText(gtimg,obj.cls_type,(left,top),0,0.3,(0,255,0))
+        cv2.putText(gtimg,obj.cls_type,(left,top),0,1,(0,255,0))
     cv2.imwrite('groundtruth.jpg', gtimg)
     
     # inference with yolov5
