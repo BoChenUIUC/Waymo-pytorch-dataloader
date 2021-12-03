@@ -248,6 +248,17 @@ if __name__ == '__main__':
     print(image.shape, idx)
     cv2.imwrite('original.jpg', image)
     
+    # groundtruth
+    gtimg = image.copy()
+    for obj in target:
+        left,top,right,bottom = obj.box2d
+        left,top,right,bottom = int(left),int(top),int(right),int(bottom)
+        if bottom-top <=20: continue
+        if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
+        cv2.rectangle(gtimg,(left, top), (right, bottom),(0,255,0))
+        cv2.putText(gtimg,obj.cls_type,(left,top),0,0.3,(0,255,0))
+    cv2.imwrite('groundtruth.jpg', gtimg)
+    
     # inference with yolov5
     import torch
 
@@ -255,17 +266,11 @@ if __name__ == '__main__':
     model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
 
     # Inference
-    results = model(image.copy())
+    results = model(image)
 
     # Results
     results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
     
-    # groundtruth
-    for obj in target:
-        left,top,right,bottom = obj.box2d
-        left,top,right,bottom = int(left),int(top),int(right),int(bottom)
-        if bottom-top <=20: continue
-        if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
-        cv2.rectangle(image,(left, top), (right, bottom),(0,255,0))
-        cv2.putText(image,obj.cls_type,(left,top),0,0.3,(0,255,0))
-    cv2.imwrite('groundtruth.jpg', image)
+    # need to compute loss from results
+    print(model.training)
+    
