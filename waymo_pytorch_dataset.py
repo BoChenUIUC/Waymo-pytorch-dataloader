@@ -1,6 +1,7 @@
 import os
 import numpy as np
 from torch.utils.data import IterableDataset
+from torch.utils.data import Dataset
 import dataset_utils.calibration_waymo as calibration
 import dataset_utils.object3d as object3d
 from PIL import Image
