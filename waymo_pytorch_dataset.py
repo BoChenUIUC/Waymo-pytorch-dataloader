@@ -296,7 +296,7 @@ if __name__ == '__main__':
     shape = (H,W)
     
     # Resize 
-    image = cv2.resize(image, (W0, H0), cv2.INTER_LINEAR)
+    image = cv2.resize(image, (W, H), cv2.INTER_LINEAR)
     
     # Extract labels
     targets = []
