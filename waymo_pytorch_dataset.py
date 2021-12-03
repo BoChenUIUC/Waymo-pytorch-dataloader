@@ -269,7 +269,7 @@ if __name__ == '__main__':
     image = dataset.get_image(frame, idx)
     
     print(image.shape, idx)
-    #cv2.imwrite('original.jpg', image)
+    cv2.imwrite('original.jpg', image)
     
     # groundtruth
     gtimg = image.copy()
@@ -280,7 +280,7 @@ if __name__ == '__main__':
         if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
         cv2.rectangle(gtimg,(left, top), (right, bottom),(0,255,0))
         cv2.putText(gtimg,obj.cls_type,(left,top-2),0,.6,(0,255,0))
-    #cv2.imwrite('groundtruth.jpg', gtimg)
+    cv2.imwrite('groundtruth.jpg', gtimg)
     
     # inference with yolov5
     import torch
@@ -323,7 +323,7 @@ if __name__ == '__main__':
     
     # NMS
     from utils.general import box_iou, non_max_suppression, scale_coords, xywh2xyxy
-    targets[:, 2:] *= torch.Tensor([W0, H0, W0, H0]).to(targets.device)  # to pixels
+    targets[:, 2:] *= torch.Tensor([W, H, W, H]).to(targets.device)  # to pixels
     nb = 1
     conf_thres=0.001  # confidence threshold
     iou_thres=0.6  # NMS IoU threshold
@@ -336,8 +336,6 @@ if __name__ == '__main__':
     from utils.plots import output_to_target, plot_images
     plot_images(ptimg, targets, '.', 'labels.jpg')
     plot_images(ptimg, output_to_target(out), '.', 'pred.jpg')
-    print(targets)
-    print(output_to_target(out))
     
     # Metrics
     iouv = torch.linspace(0.5, 0.95, 10).cuda(0)  # iou vector for mAP@0.5:0.95
@@ -364,6 +362,7 @@ if __name__ == '__main__':
             tbox = xywh2xyxy(labels[:, 1:5])  # target boxes
             scale_coords(ptimg[si].shape[1:], tbox, shape)  # native-space labels
             labelsn = torch.cat((labels[:, 0:1], tbox), 1)  # native-space labels
+            print(predn.device, labelsn.device, targets.device)
             correct = process_batch(predn, labelsn, iouv)
         else:
             correct = torch.zeros(pred.shape[0], niou, dtype=torch.bool)
