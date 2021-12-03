@@ -252,20 +252,19 @@ if __name__ == '__main__':
     import torch
 
     # Model
-    #model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
+    model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5l, yolov5x, custom
 
     # Inference
-    #results = model(image.copy())
+    results = model(image.copy())
 
     # Results
-    #results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
+    results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
     
     # groundtruth
     for obj in target:
         left,top,right,bottom = obj.box2d
-        print(obj.box2d)
         if bottom-top <=20: continue
-        #if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
-        cv2.rectangle(image,(left, top), (right, bottom),(0,255,0))
+        if obj.cls_type not in ['VEHICLE', 'PEDESTRIAN']: continue #[2,0]
+        cv2.rectangle(image,(int(left), int(top)), (int(right), int(bottom)),(0,255,0))
         cv2.putText(image,obj.cls_type,(left,top),0,0.3,(0,255,0))
     cv2.imwrite('groundtruth.jpg', image)
